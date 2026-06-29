@@ -1,0 +1,25 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Configuraciones de editores / IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Dependencias y compilación (por si se añaden herramientas de compilación en el futuro)
+node_modules/
+dist/
+build/
+out/
+
+# Ignorar el código y recursos del proyecto por ahora (para no subirlos a GitHub)
+assets/
+css/
+js/
+index.html

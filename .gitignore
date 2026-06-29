@@ -1,0 +1,49 @@
+# ==========================================
+# GITIGNORE GLOBAL PARA PROYECTOS DE JUEGOS
+# ==========================================
+
+# Temporales de Sistema Operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# Editores y Entornos de Desarrollo (IDEs)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.workspace
+.project
+.classpath
+.settings/
+
+# Paquetes y Dependencias de Node (por si se usan frameworks/bundlers en futuros juegos)
+node_modules/
+jspm_packages/
+.npm
+.eslintcache
+pnpm-lock.yaml
+yarn-error.log
+
+# Salidas de Compilación y Distribución
+dist/
+build/
+out/
+target/
+*.zip
+*.tar.gz
+*.rar
+
+# Registros e Historiales
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
