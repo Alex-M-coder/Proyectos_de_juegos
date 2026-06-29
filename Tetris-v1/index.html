@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Neon | Desafío Cyberpunk de Bloques</title>
+    <meta name="description"
+        content="Juega al Tetris Neon, el clásico arcade con estética synthwave y cyberpunk. Consigue combos, aumenta de nivel y supera tu récord.">
+    <!-- Estilos de Juego Premium -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <div class="game-wrapper" id="contenedor-principal">
+        <header>
+            <h1 id="titulo-principal">TETRIS NEON</h1>
+            <p class="tagline" id="tagline-juego">SINCRONÍA CYBERPUNK - LOGRA EL TETRIS PERFECTO</p>
+        </header>
+
+        <main class="game-layout">
+            <!-- Panel Lateral Izquierdo: Hold & Controles -->
+            <aside class="side-panel left-panel">
+                <div class="panel-box" id="panel-hold">
+                    <h2 class="panel-title">HOLD</h2>
+                    <div class="canvas-sub-wrapper">
+                        <canvas id="hold-canvas" width="100" height="100"></canvas>
+                    </div>
+                </div>
+                <div class="panel-box controls-box" id="panel-controles">
+                    <h2 class="panel-title">CONTROLES</h2>
+                    <ul class="controls-list">
+                        <li><span class="key">← / A</span> Mover Izq.</li>
+                        <li><span class="key">→ / D</span> Mover Der.</li>
+                        <li><span class="key">↑ / W</span> Rotar</li>
+                        <li><span class="key">↓ / S</span> Caída Suave</li>
+                        <li><span class="key">Espacio</span> Caída Rápida</li>
+                        <li><span class="key">C / Shift</span> Guardar</li>
+                        <li><span class="key">P</span> Pausa</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Centro: Matriz Principal y Modals de Overlay -->
+            <section class="canvas-container" id="panel-matriz">
+                <div class="canvas-main-wrapper">
+                    <canvas id="tetris-canvas" width="300" height="600"></canvas>
+                </div>
+
+                <!-- Pantalla de Inicio -->
+                <div class="overlay active" id="overlay-inicio">
+                    <h2 class="overlay-title pulse-text">PREPÁRATE</h2>
+                    <p class="overlay-desc">
+                        Alinea los bloques de neón, limpia la matriz y sobrevive a la aceleración del sistema.
+                    </p>
+                    <button class="btn-start" id="btn-empezar">INICIAR OPERACIÓN</button>
+                </div>
+
+                <!-- Pantalla de Pausa -->
+                <div class="overlay" id="overlay-pausa">
+                    <h2 class="overlay-title pause-text">SISTEMA PAUSADO</h2>
+                    <p class="overlay-desc">
+                        El flujo de bloques de neón se ha congelado temporalmente.
+                    </p>
+                    <div class="btn-group">
+                        <button class="btn-start btn-resume" id="btn-reanudar">REANUDAR</button>
+                        <button class="btn-start btn-restart" id="btn-reiniciar-pausa">REINICIAR</button>
+                    </div>
+                </div>
+
+                <!-- Pantalla de Fin de Juego -->
+                <div class="overlay" id="overlay-gameover">
+                    <h2 class="overlay-title lose-text">SISTEMA SOBRECARGADO</h2>
+                    <p class="overlay-desc">
+                        La matriz de datos se ha desbordado por completo.
+                    </p>
+                    <div class="final-score-box">
+                        <span class="final-score-label">PUNTOS FINALES:</span>
+                        <span class="final-score-val" id="val-puntos-final">0</span>
+                    </div>
+                    
+                    <!-- TABLA DE LÍDERES -->
+                    <div class="leaderboard-container">
+                        <h3 class="leaderboard-title">MEJORES RÉCORDS</h3>
+                        <ol class="leaderboard-list" id="leaderboard-list">
+                            <!-- Rellenado dinámicamente -->
+                        </ol>
+                    </div>
+
+                    <button class="btn-start btn-restart" id="btn-reiniciar-fin">REINTENTAR</button>
+                </div>
+            </section>
+
+            <!-- Panel Lateral Derecho: Siguiente y Estadísticas -->
+            <aside class="side-panel right-panel">
+                <div class="panel-box" id="panel-next">
+                    <h2 class="panel-title">SIGUIENTE</h2>
+                    <div class="canvas-sub-wrapper">
+                        <canvas id="next-canvas" width="100" height="100"></canvas>
+                    </div>
+                </div>
+                <div class="panel-box stats-box" id="panel-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">PUNTOS</span>
+                        <span class="stat-val" id="val-score">000000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">RÉCORD</span>
+                        <span class="stat-val" id="val-highscore">000000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">LÍNEAS</span>
+                        <span class="stat-val" id="val-lines">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">NIVEL</span>
+                        <span class="stat-val" id="val-level">1</span>
+                    </div>
+                </div>
+                <div class="actions-panel">
+                    <button class="btn-action" id="box-mute" title="Silenciar/Activar Música">🔊</button>
+                    <div class="volume-slider-container">
+                        <input type="range" id="volume-slider" min="0" max="100" value="50" step="5" title="Ajustar Volumen">
+                    </div>
+                    <button class="btn-action" id="box-pausa" title="Pausar/Reanudar Juego">⏸ PAUSA</button>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Panel Táctil para Móviles (Virtual D-pad) -->
+        <div class="mobile-controls-panel" id="mobile-controls">
+            <button class="btn-touch" id="touch-left" title="Mover Izquierda">◀</button>
+            <button class="btn-touch" id="touch-rotate" title="Rotar Pieza">↻</button>
+            <button class="btn-touch" id="touch-right" title="Mover Derecha">▶</button>
+            <button class="btn-touch" id="touch-down" title="Caída Suave">▼</button>
+            <button class="btn-touch" id="touch-drop" title="Caída Rápida">⭳</button>
+            <button class="btn-touch" id="touch-hold" title="Guardar Pieza">⇄</button>
+        </div>
+
+        <footer class="game-footer">
+            <p>TETRIS NEON v1.0 • Estética Retro-Cyberpunk</p>
+        </footer>
+    </div>
+
+    <!-- Scripts de la Aplicación -->
+    <script src="js/audio.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>

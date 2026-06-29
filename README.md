@@ -11,6 +11,7 @@ A continuación se detallan los juegos creados en esta carpeta y sus especificac
 | Proyecto / Enlace | Título del Juego | Stack de Tecnologías | Características Clave |
 | :--- | :--- | :--- | :--- |
 | 🚀 [**Juegito**](./Juegito/README.md) | **Batalla Estelar: El Desafío Final** | HTML5 Canvas, Vanilla JS, Vanilla CSS, Web Audio API | Batallas espaciales, 10 niveles/sectores, jefes con múltiples fases de combate, sistema de combos, dash táctico, sacudidas de cámara y efectos de cámara lenta. |
+| 👾 [**tetris-v1**](./tetris-v1/README.md) | **Tetris Neon: Sincronía Cyberpunk** | HTML5 Canvas, Vanilla JS, Vanilla CSS, Web Audio API | Tetris clásico, estética synthwave, sistema de reserva (Hold), proyección fantasma (Ghost piece), partículas de neón, sacudidas de cámara y síntesis de audio integrada. |
 
 ---
 
